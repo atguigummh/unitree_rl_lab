@@ -1,6 +1,7 @@
 joint_ids_map: [0, 6, 12, 1, 7, 13, 2, 8, 14, 3, 9, 15, 22, 4, 10, 16, 23, 5, 11,
   17, 24, 18, 25, 19, 26, 20, 27, 21, 28]
 step_dt: 0.02
+use_gym_history: true
 stiffness: [100.0, 100.0, 100.0, 150.0, 40.0, 40.0, 100.0, 100.0, 100.0, 150.0, 40.0,
   40.0, 200.0, 200.0, 200.0, 40.0, 40.0, 40.0, 40.0, 40.0, 40.0, 40.0, 40.0, 40.0,
   40.0, 40.0, 40.0, 40.0, 40.0]
@@ -38,8 +39,8 @@ observations:
     clip: null
     scale: [1.0, 1.0, 1.0]
     history_length: 5
-  velocity_commands:
-  # keyboard_velocity_commands:
+  # velocity_commands:
+  keyboard_velocity_commands:
     params: {command_name: base_velocity}
     clip: null
     scale: [1.0, 1.0, 1.0]

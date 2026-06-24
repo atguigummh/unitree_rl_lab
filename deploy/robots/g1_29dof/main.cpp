@@ -15,8 +15,7 @@ void init_fsm_state()
     if(!lowcmd_sub->isTimeout())
     {
         spdlog::critical("The other process is using the lowcmd channel, please close it first.");
-        unitree::robot::go2::shutdown();
-        // exit(0);
+        exit(0);
     }
     FSMState::lowcmd = std::make_unique<LowCmd_t>();
     FSMState::lowstate = std::make_shared<LowState_t>();
@@ -34,7 +33,7 @@ int main(int argc, char** argv)
     std::cout << "     G1-29dof Controller \n";
 
     // Unitree DDS Config
-    unitree::robot::ChannelFactory::Instance()->Init(0, vm["network"].as<std::string>());
+    unitree::robot::ChannelFactory::Instance()->Init(vm["domain_id"].as<int>(), vm["network"].as<std::string>());
 
     init_fsm_state();
 
@@ -58,4 +57,3 @@ int main(int argc, char** argv)
     
     return 0;
 }
-
