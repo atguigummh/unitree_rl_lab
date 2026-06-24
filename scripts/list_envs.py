@@ -57,12 +57,37 @@ def _walk_packages(
 
 
 def import_packages():
-    sys.path.insert(0, f"{pathlib.Path(__file__).parent.parent}/source/unitree_rl_lab/unitree_rl_lab/tasks/")
-    for package in ["locomotion.robots", "mimic.robots"]:
-        package = importlib.import_module(package)
-        for _ in _walk_packages(package.__path__, package.__name__ + "."):
-            pass
-    sys.path.pop(0)
+    """Import task registration packages without loading simulation modules."""
+
+    tasks_path = (
+        f"{pathlib.Path(__file__).parent.parent}"
+        "/source/unitree_rl_lab/unitree_rl_lab/tasks/"
+    )
+
+    sys.path.insert(0, tasks_path)
+
+    try:
+        # 官方任务：递归扫描各自的 robots 注册目录。
+        for package_name in [
+            "locomotion.robots",
+            "mimic.robots",
+        ]:
+            package = importlib.import_module(package_name)
+
+            for _ in _walk_packages(
+                package.__path__,
+                package.__name__ + ".",
+            ):
+                pass
+
+        # 自定义 reach 任务：
+        # 这里只导入 reach/__init__.py 完成 Gym 注册。
+        # 不能递归扫描整个 reach，否则会在 AppLauncher 启动前
+        # 导入 reach.mdp，进而提前导入 pxr。
+        importlib.import_module("reach")
+
+    finally:
+        sys.path.pop(0)
 
 
 import_packages()

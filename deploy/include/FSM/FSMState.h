@@ -51,6 +51,40 @@ public:
                 FSMStringMap.right.at("Passive")
             )
         );
+
+        // Keyboard shortcuts for state transitions (no joystick needed)
+        if (keyboard) {
+            registered_checks.emplace_back(
+                std::make_pair(
+                    []()->bool{ return keyboard->on_pressed && keyboard->key() == "1"; },
+                    FSMStringMap.right.at("FixStand")
+                )
+            );
+            registered_checks.emplace_back(
+                std::make_pair(
+                    []()->bool{ return keyboard->on_pressed && keyboard->key() == "2"; },
+                    FSMStringMap.right.at("Velocity")
+                )
+            );
+            registered_checks.emplace_back(
+                std::make_pair(
+                    []()->bool{ return keyboard->on_pressed && keyboard->key() == "3"; },
+                    FSMStringMap.right.at("Mimic_Dance_102")
+                )
+            );
+            registered_checks.emplace_back(
+                std::make_pair(
+                    []()->bool{ return keyboard->on_pressed && keyboard->key() == "4"; },
+                    FSMStringMap.right.at("Mimic_Gangnam_Style")
+                )
+            );
+            registered_checks.emplace_back(
+                std::make_pair(
+                    []()->bool{ return keyboard->on_pressed && keyboard->key() == "0"; },
+                    FSMStringMap.right.at("Passive")
+                )
+            );
+        }
     }
 
     void pre_run()

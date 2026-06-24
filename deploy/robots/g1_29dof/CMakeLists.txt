@@ -10,11 +10,18 @@ include_directories(
   /usr/include/eigen3
   /usr/local/include/ddscxx # dds
   /usr/local/include/iceoryx/v2.0.2 # dds
+  /home/ma/unitree_clean/unitree_sdk2/include # unitree sdk2
+  /home/ma/unitree_clean/unitree_sdk2/thirdparty/include # dds headers
+  /home/ma/unitree_clean/unitree_sdk2/thirdparty/include/ddscxx # dds cxx headers
   include
   ${PROJECT_SOURCE_DIR}/../../thirdparty/onnxruntime-linux-x64-1.22.0/include
   ${PROJECT_SOURCE_DIR}/../../include/
 )
 
+link_directories(
+  /home/ma/unitree_clean/unitree_sdk2/lib/x86_64
+  /home/ma/unitree_clean/unitree_sdk2/thirdparty/lib/x86_64
+)
 link_libraries(
   unitree_sdk2 ddsc ddscxx rt pthread # dds
   libboost_program_options.a libyaml-cpp.a fmt

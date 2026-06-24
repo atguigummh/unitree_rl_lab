@@ -10,7 +10,7 @@ from rsl_rl.modules import MLP
 @configclass
 class BasePPORunnerCfg(RslRlOnPolicyRunnerCfg):
     num_steps_per_env = 12
-    max_iterations = 500
+    max_iterations = 1000
     save_interval = 100
     experiment_name = ""  # same as task name
     empirical_normalization = False
