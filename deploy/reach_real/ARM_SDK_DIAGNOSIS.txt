@@ -1,0 +1,19 @@
+G1 arm_sdk 诊断结论：
+
+1. rt/lowstate 可稳定读取，频率约 1000 Hz。
+2. MotionSwitcherClient CheckMode 初始为 ai。
+3. ReleaseMode 成功，CheckMode 后 name 为空字符串。
+4. rt/arm_sdk 已测试：
+   - target 正常变化；
+   - actual 不跟随；
+   - err 长期保持约 0.087 rad。
+5. rt/armsdk 已测试：
+   - target 正常变化；
+   - actual 不跟随；
+   - err 长期保持约 0.087 rad。
+6. 已补 CRC、双臂 15~28、腰部 12/13/14。
+7. 结论：
+   当前机器人不执行 rt/arm_sdk / rt/armsdk DDS 关节指令。
+8. 下一步：
+   改查官方 g1_arm_action_client.py 和 g1_arm_action_example.py，
+   走 G1 Arm Action 高层接口。
